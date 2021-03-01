@@ -33,11 +33,12 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return StreamBuilder<User>(
       stream: widget.auth.authStateChange(),
+      //inicialData: //puede sustituir la comprobación de connectionState
       builder: (context, snapshot) {
         //connectionState nos dice si el stream comenzó a emitir eventos o no
         if (snapshot.connectionState == ConnectionState.active) {
           final User user = snapshot.data;
-
+          //snapshot.hasError //tambien se puede obtener los errores enviado por stream con hasError
           if (user == null) {
             return SignInPage(
               //usamos widget.auth, porque auth está en el statefull widget y no este widget, por ello hacemos referencia al widget original
