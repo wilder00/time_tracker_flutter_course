@@ -31,16 +31,31 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_user == null) {
-      return SignInPage(
-        //usamos widget.auth, porque auth está en el statefull widget y no este widget, por ello hacemos referencia al widget original
-        auth: widget.auth,
-        onSignIn: _updateUser,
-      );
-    }
-    return HomePage(
-      auth: widget.auth,
-      onSignOut: () => _updateUser(null),
-    ); // temporary placeholder for HomePage
+    return StreamBuilder<User>(
+      stream: widget.auth.authStateChange(),
+      builder: (context, snapshot) {
+        //connectionState nos dice si el stream comenzó a emitir eventos o no
+        if (snapshot.connectionState == ConnectionState.active) {
+          final User user = snapshot.data;
+
+          if (user == null) {
+            return SignInPage(
+              //usamos widget.auth, porque auth está en el statefull widget y no este widget, por ello hacemos referencia al widget original
+              auth: widget.auth,
+              onSignIn: _updateUser,
+            );
+          }
+          return HomePage(
+            auth: widget.auth,
+            onSignOut: () => _updateUser(null),
+          );
+        }
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+    );
   }
 }

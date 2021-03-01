@@ -61,8 +61,11 @@ Añadiendo los plugins
 
 ### Ejemplo de Stream con dartpad
 
+uso básico de stream
+
 ```
-import 'dart:async'
+import 'dart:async';
+
 void addLessThanFive(StreamController controller,int value){
    if(value<5){
       controller.sink.add(value);
@@ -74,11 +77,82 @@ void addLessThanFive(StreamController controller,int value){
 void main(){
    final controller = StreamController();
 
-   controller.sink.add(1);
-   controller.sink.add(2);
+   addLessThanFive(controller, 1);
+   addLessThanFive(controller, 2);
+   addLessThanFive(controller, 3);
+   addLessThanFive(controller, 4);
+   addLessThanFive(controller, 5);
 
    controller.stream.listen((value){
       print(value);
+   });
+
+}
+```
+
+agregando la captura de errores al stream
+
+```
+import 'dart:async';
+
+void addLessThanFive(StreamController controller,int value){
+   if(value<5){
+      controller.sink.add(value);
+   }else{
+      controller.sink.addError(StateError('$value is not less than 5'));
+   }
+}
+
+void main(){
+   final controller = StreamController();
+
+   addLessThanFive(controller, 1);
+   addLessThanFive(controller, 2);
+   addLessThanFive(controller, 3);
+   addLessThanFive(controller, 4);
+   addLessThanFive(controller, 5);
+
+   controller.stream.listen((value){
+      print(value);
+   }, onError: (error){
+      print(error);
+   });
+
+}
+```
+
+agregando el detector de evento de cierre del stream
+
+```
+import 'dart:async';
+
+void addLessThanFive(StreamController controller,int value){
+   if(value<5){
+      controller.sink.add(value);
+   }else{
+      controller.sink.addError(StateError('$value is not less than 5'));
+   }
+}
+
+void main(){
+   final controller = StreamController();
+
+   addLessThanFive(controller, 1);
+   addLessThanFive(controller, 2);
+   addLessThanFive(controller, 3);
+   addLessThanFive(controller, 4);
+   addLessThanFive(controller, 5);
+
+   //cerrando el stream después de usarlo 5 veces, después de cerrarlo daria error usar el stream
+   controller.close();
+
+
+   controller.stream.listen((value){
+      print(value);
+   }, onError: (error){
+      print(error);
+   }, onDone:(){
+      print("done");
    });
 
 }
