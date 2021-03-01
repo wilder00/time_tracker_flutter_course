@@ -6,8 +6,12 @@ import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.da
 class SignInPage extends StatelessWidget {
   //agregamos el siguiente método para activarlo cuando damos tap en el boton Go anonimous |  Ver el término de "singleton" que esta´asociaso a ``instance`` que no permite más de una instancia
   Future<void> _signInAnonymously() async {
-    final userCredentials = await FirebaseAuth.instance.signInAnonymously();
-    print('${userCredentials.user.uid}');
+    try {
+      final userCredentials = await FirebaseAuth.instance.signInAnonymously();
+      print('${userCredentials.user.uid}');
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
