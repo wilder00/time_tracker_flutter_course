@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/landing_page.dart';
+import 'package:time_tracker_flutter_course/services/auth.dart';
 
 //si usamos async await debemos devolver un Future
 Future<void> main() async {
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: LandingPage(),
+      home: LandingPage(
+        //pasamos el Auth() original, bueno, la instancia
+        auth: Auth(),
+      ),
     );
   }
 }
