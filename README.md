@@ -57,10 +57,31 @@ Añadiendo los plugins
 
 - firebase con flutter: [https://firebase.flutter.dev/docs/overview#initializing-flutterfire](https://firebase.flutter.dev/docs/overview#initializing-flutterfire)
 
+- facebook login: [https://developers.facebook.com/docs/facebook-login](https://developers.facebook.com/docs/facebook-login)
+
+---
+
 ## implementar sign in con google y firebase
 
 1. activar el sign in con google en firebase
 2. descargar el plugin [google_sign_in](https://pub.dev/packages/google_sign_in) para este caso usaremos la versión 4.5.6
+
+---
+
+## implementar sign in con Facebook y firebase
+
+1. Registrarse y/o entrar a facebook developer
+2. leer la documentación de (sign in con facebook)[https://developers.facebook.com/docs/facebook-login]
+3. agragar los recursos necesarios en la carpeta/archivo `android/app/src/main/res/values/strings.xml` (si no hay, crear el archivo) según las instrucciones de desarrollo con android de Facebook.
+4. copiar el contenido del styles.xml para tener la plantilla de un xml válido.
+
+   - en la parte de agregar el key usé: `keytool -exportcert -alias androiddebugkey -keystore "C:\Users\LEGION\.android\debug.keystore" | ./openssl sha1 -binary | ./openssl base64` en vez del que se muestra
+
+Despues de configurar los archivos de android como lo indica Facebook:
+
+1. registramos la app facebook que creamos con el id y secret code en firebase
+2. descargamos el pluggin de flutter: [flutter_login_facebook](https://pub.dev/packages/flutter_login_facebook) para este caso, la versión 0.4.0+1
+3.
 
 ---
 
