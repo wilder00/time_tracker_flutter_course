@@ -57,6 +57,13 @@ Añadiendo los plugins
 
 - firebase con flutter: [https://firebase.flutter.dev/docs/overview#initializing-flutterfire](https://firebase.flutter.dev/docs/overview#initializing-flutterfire)
 
+## implementar sign in con google y firebase
+
+1. activar el sign in con google en firebase
+2. descargar el plugin [google_sign_in](https://pub.dev/packages/google_sign_in) para este caso usaremos la versión 4.5.6
+
+---
+
 ## Ejemplos
 
 ### Ejemplo de Stream con dartpad
